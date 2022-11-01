@@ -28,7 +28,7 @@ def UniProt_data_extraction(UniProt_ID):
     session = requests.get(Uniprot_API+UniProt_ID)  # request to uniprot
     uniprot_API_json=session.json()
 
-    try:
+    try: 
         if 'genes' in uniprot_API_json:   # all these comming if conditions on returned datastructure inside 'uniprot_API_json'
             gene_names_=uniprot_API_json['genes'][0]['geneName']['value']
         if 'sequence' in uniprot_API_json:

@@ -20,7 +20,8 @@ def create_app():
             file = request.files['file']
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                new_filename = f'{filename.split(".")[0]}_{str(datetime.now())}.csv'
+                # f'output/{datetime.now():%Y-%m-%d_%H-%M-%S}.csv'
+                new_filename = f'{filename.split(".")[0]}_{datetime.now():%Y-%m-%d_%H-%M-%S}.csv'
                 save_location = os.path.join('input', new_filename)
                 file.save(save_location)
 
