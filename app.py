@@ -14,6 +14,11 @@ def allowed_file(filename):
 def create_app():
     app = Flask(__name__)
 
+
+    @app.route("/")
+    def index():
+        return redirect(url_for('upload'))
+
     @app.route('/upload', methods=['GET', 'POST'])
     def upload():
         if request.method == 'POST':

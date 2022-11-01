@@ -17,13 +17,12 @@ def UniProt_data_extraction(UniProt_ID):
     family_class=''
     PDB_IDs=[]
 
-#   Code snipt for retrying 3 times in case of connection error with a delay of 0.05 ms
+#   Code snipt for retrying X times in case of connection error with a delay of X ms
 
     session = requests.Session()
     # retry = Retry(connect=3, backoff_factor=0.5)
-    retry = Retry(total=2,connect=3, backoff_factor=0.5, allowed_methods=None, status_forcelist=[429, 500, 502, 503, 504])
+    retry = Retry(total=3,connect=4, read=4,backoff_factor=0.5, allowed_methods=None, status_forcelist=[429, 500, 502, 503, 504])
     adapter = HTTPAdapter(max_retries=retry)
-    session.mount("http://", adapter)
     session.mount("https://", adapter)
     session = requests.get(Uniprot_API+UniProt_ID)  # request to uniprot
     uniprot_API_json=session.json()
