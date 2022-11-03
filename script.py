@@ -24,6 +24,7 @@ def UniProt_data_extraction(UniProt_ID):
     retry = Retry(total=3,connect=4, read=4,backoff_factor=0.5, allowed_methods=None, status_forcelist=[429, 500, 502, 503, 504])
     adapter = HTTPAdapter(max_retries=retry)
     session.mount("https://", adapter)
+    session.mount("http://", adapter)
     session = requests.get(Uniprot_API+UniProt_ID)  # request to uniprot
     uniprot_API_json=session.json()
 
